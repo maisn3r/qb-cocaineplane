@@ -1,7 +1,5 @@
 Config = {}
-Config.Locale = 'en' -- English, German or Spanish - (en/de/es)
 
-Config.useMythic = true -- change this if you want to use mythic_notify or not
 Config.progBar = true -- change this if you want to use Progress Bar or not
 Config.useCD = false -- change this if you want to have a global cooldown or not
 Config.cdTime = 1200000 -- global cooldown in ms. Set to 20 minutes by default - (https://www.timecalculator.net/minutes-to-milliseconds)

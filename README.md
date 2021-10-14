@@ -1,6 +1,6 @@
 Smuggle cocaine brick into the city by a plane to break it down onto small fractions for selling or usage.
 
-Features:
+**Features:**
 
 - Rent a plane.
 - Pick up cocaine brick package.

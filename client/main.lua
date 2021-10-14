@@ -93,9 +93,7 @@ AddEventHandler('qb-cocaineplane:onUse', function()
 	DoScreenFadeOut(1000)
 	Citizen.Wait(1000)
 	DoScreenFadeIn(2000)
-	if Config.useMythic then
-		QBCore.Functions.Notify("You are feeling normal now.", "success")
-	end
+	QBCore.Functions.Notify("You are feeling normal now.", "success")
 	SetPedArmour(crackhead, 0)
 	ClearTimecycleModifier()
 end)
@@ -178,13 +176,11 @@ AddEventHandler('qb-cocaineplane:client:PoliceAlertMessage', function(title, coo
 end)
 
 function PlaneSpawn()
-
-	if DoesEntityExist(airplane) then
-
-	    SetVehicleHasBeenOwnedByPlayer(airplane,false)
-		SetEntityAsNoLongerNeeded(airplane)
-		DeleteEntity(airplane)
-	end
+if DoesEntityExist(airplane) then
+	SetVehicleHasBeenOwnedByPlayer(airplane,false)
+	SetEntityAsNoLongerNeeded(airplane)
+	DeleteEntity(airplane)
+end
 
 	local planehash = GetHashKey("dodo")
 	

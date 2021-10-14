@@ -85,9 +85,7 @@ end)
 
 RegisterNetEvent('qb-cocaineplane:onUse')
 AddEventHandler('qb-cocaineplane:onUse', function()
-	if Config.useMythic then
-		QBCore.Functions.Notify("You used cocaine.", "success")
-	end
+	QBCore.Functions.Notify("You used cocaine.", "success")
 	local crackhead = PlayerPedId()
 	SetPedArmour(crackhead, 30)
 	SetTimecycleModifier("DRUG_gas_huffin")
@@ -231,9 +229,7 @@ Citizen.CreateThread(function()
 		sleep = 100 
 		if DoesEntityExist(airplane) then
 			if GetVehicleEngineHealth(airplane) < 0 or GetVehicleBodyHealth(airplane) < 0 then
-				if Config.useMythic then
-					QBCore.Functions.Notify("Mission Canceled", "error")
-				end
+				QBCore.Functions.Notify("Mission Canceled", "error")
 				RemoveBlip(blip1)
 				RemoveBlip(blip)
 				DeleteEntity(pickupSpawn)
@@ -248,10 +244,7 @@ Citizen.CreateThread(function()
 end)
 
 function delivery()
-	if Config.useMythic then
-		QBCore.Functions.Notify("Get in the plane and pick up the delivery marked on your GPS.")
-
-	end
+	QBCore.Functions.Notify("Get in the plane and pick up the delivery marked on your GPS.")
 	local pickup = GetHashKey("prop_drop_armscrate_01")
 	blip = AddBlipForCoord(location.delivery.x,location.delivery.y,location.delivery.z)
 	-- SetBlipRoute(blip, true)
@@ -314,9 +307,7 @@ Citizen.CreateThread(function()
 		sleep = 100 
 		if DoesEntityExist(airplane) then
 			if GetVehicleEngineHealth(veh) < 0 or GetVehicleBodyHealth(airplane) < 0 then
-				if Config.useMythic then
-					QBCore.Functions.Notify("Mission Canceled", "error")
-				end
+				QBCore.Functions.Notify("Mission Canceled", "error")
 				RemoveBlip(blip)
 				RemoveBlip(blip1)
 				TriggerServerEvent('qb-cocaineplane:updateTable', false)

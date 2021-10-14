@@ -2,10 +2,10 @@ QBCore = exports['qb-core']:GetCoreObject()
 
 Citizen.CreateThread(function() 
     while true do
-		Citizen.Wait(30 * 60000)
-		print('DOSE')
-		TriggerServerEvent('qb-cocaineplane:updateTable', false)
-	end
+	Citizen.Wait(30 * 60000)
+	print('DOSE')
+	TriggerServerEvent('qb-cocaineplane:updateTable', false)
+    end
 end)
 
 local inUse = false
@@ -19,10 +19,6 @@ local delivering
 local hangar
 local jerrycan
 local checkPlane
-local flying
-local landing
-local hasLanded
-local pilot
 local airplane
 local planehash
 local driveHangar
@@ -181,43 +177,29 @@ if DoesEntityExist(airplane) then
 	SetEntityAsNoLongerNeeded(airplane)
 	DeleteEntity(airplane)
 end
-
-	local planehash = GetHashKey("dodo")
-	
+    local planehash = GetHashKey("dodo")
     RequestModel(planehash)
     while not HasModelLoaded(planehash) do
         Citizen.Wait(0)
     end
-
     airplane = CreateVehicle(planehash, location.parking.x, location.parking.y, location.parking.z, location.parking.h, 100, true, false)
     local plt = GetVehicleNumberPlateText(airplane)
 	SetVehicleHasBeenOwnedByPlayer(airplane,true)
 	exports['LegacyFuel']:SetFuel(airplane, 100)
-	
 	local plate = GetVehicleNumberPlateText(airplane)
-	--TriggerServerEvent('garage:addKeys', plate)
 	TriggerEvent("vehiclekeys:client:SetOwner", plate)
-
-	RemoveBlip(blip1)
-	-- SetBlipRoute(blip1, false)
-	
+	RemoveBlip(blip1)	
 	dodo = false
 	delivering = true
 	delivery()
-
-	
     while true do
     	Citizen.Wait(1)
     	 DrawText3D(location.parking.x, location.parking.y, location.parking.z, "Cocaine Plane.")
 		 if #(GetEntityCoords(PlayerPedId()) - vector3(location.parking.x, location.parking.y, location.parking.z)) < 8.0 then
     	 	return
-    	 end
-	end
+    	   end
+     end
 end
-
-function planeFly()	
-end
-
 
 Citizen.CreateThread(function()
 	checkPlane = true
@@ -235,7 +217,7 @@ Citizen.CreateThread(function()
 		else
 			sleep = 3000
 		end
-		Citizen.Wait(sleep)
+	   Citizen.Wait(sleep)
 	end
 end)
 
@@ -243,7 +225,6 @@ function delivery()
 	QBCore.Functions.Notify("Get in the plane and pick up the delivery marked on your GPS.")
 	local pickup = GetHashKey("prop_drop_armscrate_01")
 	blip = AddBlipForCoord(location.delivery.x,location.delivery.y,location.delivery.z)
-	-- SetBlipRoute(blip, true)
 	RequestModel(pickup)
 	while not HasModelLoaded(pickup) do
 		Citizen.Wait(0)
@@ -264,18 +245,15 @@ function delivery()
 					if IsControlJustPressed(1, 51) then
 						if veh == airplane then
 							delivering = false
-
 							QBCore.Functions.Progressbar("picking_", "Collecting Delivery", 1000, false, true, {
 								disableMovement = true,
 								disableCarMovement = true,
 								disableMouse = false,
 								disableCombat = true,
 							}, {}, {}, {}, function() -- Done
-						
 							end, function() -- Cancel
 								QBCore.Functions.Notify("Canceled", "error")
 							end)
-
 							Citizen.Wait(2000)
 							QBCore.Functions.Notify("You picked up the package. Now, return to the airfield marked on your GPS for delivery.", "success")
 							DeleteEntity(pickupSpawn)
@@ -331,10 +309,8 @@ function DrawText3D(x, y, z, text)
 	ClearDrawOrigin()
 end
 function final()
-	--exports['mythic_notify']:SendAlert('inform', 'deliv_plane')
 	QBCore.Functions.Notify("Deliver the plane back to a hangar.", "success")
 	blip = AddBlipForCoord(location.hangar.x,location.hangar.y,location.hangar.z)
-	-- SetBlipRoute(blip, true)
 	hangar = true
 	local player = PlayerPedId()
 	Citizen.CreateThread(function()
@@ -346,9 +322,7 @@ function final()
 			if disttocoord <= 10 then
 				if veh == airplane then
 					RemoveBlip(blip)
-					-- SetBlipRoute(blip, false)
 					DrawText3D(location.hangar.x,location.hangar.y,location.hangar.z-1, '~b~E~w~ - Park Plane')
-					-- DrawMarker(27, location.hangar.x,location.hangar.y,location.hangar.z-0.9, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 2.0, 2.0, 3, 252, 152, 100, false, true, 2, false, false, false, false)
 					if IsControlJustPressed(1, 51) then
 						if veh == airplane then
 							hangar = false
@@ -369,11 +343,9 @@ function final()
 							TriggerServerEvent('qb-cocaineplane:GiveItem')
 							DeleteEntity(airplane)
 							SetVehicleDoorsLocked(airplane, 2)
-							Citizen.Wait(1000)
-							if Config.useCD then		
-								cooldown()
-							else
-								TriggerServerEvent('qb-cocaineplane:updateTable', false)
+							Citizen.Wait(1000)	
+							cooldown()
+							TriggerServerEvent('qb-cocaineplane:updateTable', false)
 							end
 						else
 							QBCore.Functions.Notify("This is not the vehicle which was provided to you.", "error")
@@ -448,8 +420,8 @@ function processing()
 end
 
 function cooldown()
-	Citizen.Wait(Config.cdTime)
-	TriggerServerEvent('qb-cocaineplane:updateTable', false)
+    Citizen.Wait(20000)
+    TriggerServerEvent('qb-cocaineplane:updateTable', false)
 end
 
 function playAnimPed(animDict, animName, duration, buyer, x,y,z)

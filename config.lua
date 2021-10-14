@@ -1,15 +1,10 @@
 Config = {}
 
-Config.progBar = true -- change this if you want to use Progress Bar or not
-Config.useCD = false -- change this if you want to have a global cooldown or not
-Config.cdTime = 1200000 -- global cooldown in ms. Set to 20 minutes by default - (https://www.timecalculator.net/minutes-to-milliseconds)
 Config.doorHeading = 114.13 -- change this to the proper heading to look at the door you start the runs with
 Config.price = 1000 -- amount you have to pay to start a run 
 Config.cokeTime = 60000 -- time in ms the effects of coke will last for
 Config.randBrick = math.random(7,10) -- change the numbers to how much coke you want players to receive after breaking down bricks
 Config.takeBrick = 1 -- amount of brick you want to take after processing
-Config.getCoords = false -- gets coords with /mycoords
-Config.pilotPed = "s_m_m_pilot_02" -- change this to have a different ped as the planes pilot - (lsit of peds: https://wiki.rage.mp/index.php?title=Peds)
 
 Config.locations = {
 	[1] = { 

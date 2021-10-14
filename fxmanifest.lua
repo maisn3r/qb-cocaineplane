@@ -3,19 +3,16 @@ fx_version 'bodacious'
 games { 'gta5' }
 
 
-author 'DOSE'
+author 'Erratic'
 
-shared_scripts {
-    "@arp-core/import.lua"
-}
 
 client_scripts {
-	'config.lua',
+    'config.lua',
     'client/main.lua'
 }
 
 server_scripts {
-	'config.lua',
+    'config.lua',
     'server/main.lua'
 }
 

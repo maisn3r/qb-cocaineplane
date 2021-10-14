@@ -419,7 +419,7 @@ function processing()
 end
 
 function cooldown()
-    Citizen.Wait(20000)
+    Citizen.Wait(2000)
     TriggerServerEvent('qb-cocaineplane:updateTable', false)
 end
 

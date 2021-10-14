@@ -11,8 +11,6 @@ Config.locations = {
 		fuel = {x = 4508.69, y = -4509.32, z = 4.84}, -- location of the jerry can/waypoint
 		landingLoc = {x = 1743.822, y = 3258.627, z = 41.36734}, -- don't mess with this unless you know what you're doing
 		plane = {x = 736.6801, y = 2973.17, z = 93.81644, h = 284.13}, -- don't mess with this unless you know what you're doing
-		runwayStart = {x = 2149.26, y = 4817.02, z = 41.27}, -- don't mess with this unless you know what you're doing
-		runwayEnd = {x = 1918.58, y = 4708.69, z = 41.19}, -- don't mess with this unless you know what you're doing
 		fuselage = {x = 1729.039, y = 3311.423, z = 41.2235}, -- location of the 3D text to fuel the plane
 		stationary = {x = 1730.208, y = 3315.586, z = 41.22352, h = 16.29}, -- location of the plane if Config.landPlane is false 
 		delivery = {x = 2916.86, y = 1476.89, z = -0.43}, -- delivery location vector3(2916.86, 1476.89, -0.43)

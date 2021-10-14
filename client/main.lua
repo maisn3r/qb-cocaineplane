@@ -308,6 +308,7 @@ function DrawText3D(x, y, z, text)
 	DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
 	ClearDrawOrigin()
 end
+
 function final()
 	QBCore.Functions.Notify("Deliver the plane back to a hangar.", "success")
 	blip = AddBlipForCoord(location.hangar.x,location.hangar.y,location.hangar.z)
@@ -327,7 +328,6 @@ function final()
 						if veh == airplane then
 							hangar = false
 							FreezeEntityPosition(airplane, true)
-
 							QBCore.Functions.Progressbar("parking", "Parking Plane", 1500, false, true, {
 								disableMovement = true,
 								disableCarMovement = true,
@@ -340,25 +340,24 @@ function final()
 							end)
 
 							Citizen.Wait(2000)
-							TriggerServerEvent('qb-cocaineplane:GiveItem')
+							TriggerServerEvent('coke:GiveItem')
 							DeleteEntity(airplane)
 							SetVehicleDoorsLocked(airplane, 2)
 							Citizen.Wait(1000)	
 							cooldown()
-							TriggerServerEvent('qb-cocaineplane:updateTable', false)
-							end
+							TriggerServerEvent('coke:updateTable', false)
 						else
 							QBCore.Functions.Notify("This is not the vehicle which was provided to you.", "error")
 							DeleteEntity(airplane)
 						end 
 					end
 				end
-			else
-				sleep = 1500
-			end
-			Citizen.Wait(sleep)
-		end
-	end)
+			  else
+			      sleep = 1500
+		    end
+		 Citizen.Wait(sleep)
+	    end
+      end)
 end
 
 Citizen.CreateThread(function()

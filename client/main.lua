@@ -310,54 +310,56 @@ function DrawText3D(x, y, z, text)
 end
 
 function final()
-	QBCore.Functions.Notify("Deliver the plane back to a hangar.", "success")
-	blip = AddBlipForCoord(location.hangar.x,location.hangar.y,location.hangar.z)
-	hangar = true
-	local player = PlayerPedId()
-	Citizen.CreateThread(function()
-		while hangar do
-			sleep = 5	
-			local playerpos = GetEntityCoords(player)
-			local disttocoord = #(vector3(location.hangar.x,location.hangar.y,location.hangar.z)-vector3(playerpos.x,playerpos.y,playerpos.z))
-			local veh = GetVehiclePedIsIn(PlayerPedId(),false)
-			if disttocoord <= 10 then
-				if veh == airplane then
-					RemoveBlip(blip)
-					DrawText3D(location.hangar.x,location.hangar.y,location.hangar.z-1, '~b~E~w~ - Park Plane')
-					if IsControlJustPressed(1, 51) then
-						if veh == airplane then
-							hangar = false
-							FreezeEntityPosition(airplane, true)
-							QBCore.Functions.Progressbar("parking", "Parking Plane", 1500, false, true, {
-								disableMovement = true,
-								disableCarMovement = true,
-								disableMouse = false,
-								disableCombat = true,
-							}, {}, {}, {}, function() -- Done
-								DeleteEntity(airplane)
-							end, function() -- Cancel
-								DeleteEntity(airplane)
-							end)
+    --exports['mythic_notify']:SendAlert('inform', 'deliv_plane')
+    QBCore.Functions.Notify("Deliver the plane back to a hangar.", "success")
+    blip = AddBlipForCoord(location.hangar.x,location.hangar.y,location.hangar.z)
+    -- SetBlipRoute(blip, true)
+    hangar = true
+    local player = PlayerPedId()
+    Citizen.CreateThread(function()
+    while hangar do
+        sleep = 5
+        local playerpos = GetEntityCoords(player)
+        local disttocoord = #(vector3(location.hangar.x,location.hangar.y,location.hangar.z)-vector3(playerpos.x,playerpos.y,playerpos.z))
+        local veh = GetVehiclePedIsIn(PlayerPedId(),false)
+        if disttocoord <= 10 then
+            if veh == airplane then
+                RemoveBlip(blip)
+                DrawText3D(location.hangar.x,location.hangar.y,location.hangar.z-1, '~b~E~w~ - Park Plane')
+                if IsControlJustPressed(1, 51) then
+                    if veh == airplane then
+                        hangar = false
+                        FreezeEntityPosition(airplane, true)
+                        QBCore.Functions.Progressbar("parking", "Parking Plane", 1500, false, true, {
+                            disableMovement = true,
+                            disableCarMovement = true,
+                            disableMouse = false,
+                            disableCombat = true,
+                        }, {}, {}, {}, function() -- Done
+                        DeleteEntity(airplane)
+                        end, function() -- Cancel
+                        DeleteEntity(airplane)
+                        end)
 
-							Citizen.Wait(2000)
-							TriggerServerEvent('coke:GiveItem')
-							DeleteEntity(airplane)
-							SetVehicleDoorsLocked(airplane, 2)
-							Citizen.Wait(1000)	
-							cooldown()
-							TriggerServerEvent('coke:updateTable', false)
-						else
-							QBCore.Functions.Notify("This is not the vehicle which was provided to you.", "error")
-							DeleteEntity(airplane)
-						end 
-					end
-				end
-			  else
-			      sleep = 1500
-		    end
-		 Citizen.Wait(sleep)
-	    end
-      end)
+                        Citizen.Wait(2000)
+                        TriggerServerEvent('coke:GiveItem')
+                        DeleteEntity(airplane)
+                        SetVehicleDoorsLocked(airplane, 2)
+                        Citizen.Wait(1000)
+                        cooldown()
+                        TriggerServerEvent('coke:updateTable', false)
+                    else
+                        QBCore.Functions.Notify("This is not the vehicle which was provided to you.", "error")
+                        DeleteEntity(airplane)
+                    end
+                end
+            end
+        else
+            sleep = 1500
+        end
+        Citizen.Wait(sleep)
+    end
+    end)
 end
 
 Citizen.CreateThread(function()
@@ -419,7 +421,7 @@ function processing()
 end
 
 function cooldown()
-    Citizen.Wait(2000)
+    Citizen.Wait(200)
     TriggerServerEvent('qb-cocaineplane:updateTable', false)
 end
 

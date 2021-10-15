@@ -59,7 +59,7 @@ AddEventHandler('qb-cocaineplane:server:PoliceAlertMessage', function(title, coo
             if (Player.PlayerData.job.name == "police" and Player.PlayerData.job.onduty) then
                 if blip then
                         TriggerClientEvent("arp-phone:client:addPoliceAlert", v, alertData)
-                        TriggerClientEvent("arp-qb-cocaineplane:client:PoliceAlertMessage", v, title, coords, blip)
+                        TriggerClientEvent("qb-cocaineplane:client:PoliceAlertMessage", v, title, coords, blip)
                 end
             end
         end
